@@ -1,19 +1,14 @@
-import { useState } from "react";
+import { useRef } from "react";
 
 export default function Login() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-
+  const emailRef = useRef();
+  const passRef = useRef();
   function handleSubmit(event) {
     event.preventDefault();
-    console.log(email);
-  }
-  function handleEmail(event) {
-    setEmail(event.target.value);
-  }
+    console.log(emailRef.current.value);
+    console.log(passRef.current.value);
 
-  function handlePassword(event) {
-    setPassword(event.target.value);
+    emailRef.current.value = ""; //not good
   }
 
   return (
@@ -23,24 +18,12 @@ export default function Login() {
       <div className="control-row">
         <div className="control no-margin">
           <label htmlFor="email">Email</label>
-          <input
-            id="email"
-            type="email"
-            name="email"
-            value={email}
-            onChange={handleEmail}
-          />
+          <input id="email" type="email" name="email" ref={emailRef} />
         </div>
 
         <div className="control no-margin">
           <label htmlFor="password">Password</label>
-          <input
-            id="password"
-            type="password"
-            name="password"
-            value={password}
-            onChange={handlePassword}
-          />
+          <input id="password" type="password" name="password" ref={passRef} />
         </div>
       </div>
 
